@@ -1,6 +1,6 @@
 {
     "name": "akhan619/laravel-ses-tracking",
-    "description": "A CLI based package to create the AWS (SES + SNS) infrastructure to receive email event notifications with Http/Https endpoint.",
+    "description": "A Laravel artisan based package to create the AWS (SES + SNS) infrastructure to receive email event notifications with Http/Https endpoint.",
     "license": "MIT",
     "authors": [
         {
