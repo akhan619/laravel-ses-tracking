@@ -1,0 +1,39 @@
+{
+    "name": "akhan619/laravel-ses-tracking",
+    "description": "A CLI based package to create the AWS (SES + SNS) infrastructure to receive email event notifications with Http/Https endpoint.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aman Khan",
+            "email": "amankhan.mailbox@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/akhan619/laravel-ses-tracking",
+    "keywords": ["Laravel", "Ses", "Tracking", "Sns", "Webhook", "http", "https", "email", "cli"],
+    "require": {
+        "php": "^8.0.2",
+        "illuminate/support": "~9",
+        "aws/aws-sdk-php": "^3.218"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~9.0",
+        "orchestra/testbench": "~9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Akhan619\\LaravelSesTracking\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Akhan619\\LaravelSesTracking\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Akhan619\\LaravelSesTracking\\LaravelSesTrackingServiceProvider"
+            ]
+        }
+    }
+}
