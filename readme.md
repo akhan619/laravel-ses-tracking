@@ -1,4 +1,5 @@
 # Laravel SES Tracking
+[![StyleCI](https://github.styleci.io/repos/480182263/shield?branch=main)](https://github.styleci.io/repos/480182263?branch=main)
 
 Setup the AWS infrastructure to handle email events using SES/SNS and http/s endpoints with a single Laravel artisan command. This package is unopinionated in the sense that every setting can be changed as per your requirements. It follows an interactive CLI based setup process so that you know exactly what will be configured. Also, includes a debug mode where you can see all the settings and configurations that will be used without actually making the API calls. Finally, it can be very painful to clean up the AWS resources when an API call fails. For example, if you are trying to enable some advanced filter policy for an endpoint, only for that setting to fail, then you might have to go back and remove the configuration sets and SNS topics manually. To tackle the issue, the package will automatically try and revert any changes made to the AWS infrastructure when any exceptions occur.
 
