@@ -45,19 +45,19 @@ class LaravelSesTrackingServiceProvider extends ServiceProvider
             $this->app->singleton(AwsCredentialsContract::class, function ($app) {
                 return new AwsCredentialsManager(self::$configName);
             });
-    
+
             $this->app->singleton(SubscriptionContract::class, function ($app) {
                 return new SubscriptionManager(self::$configName);
             });
-    
+
             $this->app->singleton(WebhooksContract::class, function ($app) {
                 return new WebhooksManager(self::$configName, $app->make(SubscriptionContract::class));
             });
-    
+
             $this->app->singleton(SnsDataContract::class, function ($app) {
                 return new SnsDataManager(self::$configName);
             });
-    
+
             $this->app->singleton(SesDataContract::class, function ($app) {
                 return new SesDataManager(self::$configName);
             });

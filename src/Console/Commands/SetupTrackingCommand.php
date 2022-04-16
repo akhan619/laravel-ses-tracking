@@ -3,8 +3,8 @@
 namespace Akhan619\LaravelSesTracking\Console\Commands;
 
 use Akhan619\LaravelSesTracking\App\SetupManager;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Illuminate\Console\Command;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class SetupTrackingCommand extends Command
 {
