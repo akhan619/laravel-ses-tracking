@@ -12,7 +12,7 @@ return [
     |	Type: bool
     |
     */
-    'debug' => TRUE,
+    'debug' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
     'ses' => [
-        'key' => env('AWS_ACCESS_KEY_ID'),
+        'key'    => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION'),
     ],
@@ -41,8 +41,8 @@ return [
     |
     */
     'subscriber' => [
-        'http' => FALSE, 
-        'https' => TRUE,
+        'http'  => false,
+        'https' => true,
     ],
 
     /*
@@ -50,9 +50,9 @@ return [
     | Domain
     |--------------------------------------------------------------------------
     |
-    |   Define the domain to use for the SNS notifications to be routed to. 
+    |   Define the domain to use for the SNS notifications to be routed to.
     |   If null the domain will be pulled from APP_URL.
-    |   Do not include the SCHEME like http/s, e.g. example.com	
+    |   Do not include the SCHEME like http/s, e.g. example.com
     |	Type: string
     |
     */
@@ -63,13 +63,13 @@ return [
     | Scheme
     |--------------------------------------------------------------------------
     |
-    |   Define the scheme http/https to use for the SNS notifications to be routed to. 
-    |   If null the scheme will be pulled from APP_URL. 
+    |   Define the scheme http/https to use for the SNS notifications to be routed to.
+    |   If null the scheme will be pulled from APP_URL.
     |   MUST MATCH THE SNS PROTOCAL HTTP/HTTPS TYPES USED ABOVE, IF ONE OF THEM IS ENABLED.
     |	Type: string
     |
     */
-    // 
+    //
     'scheme' => null,
 
     /*
@@ -83,16 +83,16 @@ return [
     |
     */
     'active' => [
-        'sends' => TRUE,
-        'rendering_failures' => FALSE,
-        'rejects' => FALSE,
-        'deliveries' => TRUE,
-        'bounces' => TRUE,
-        'complaints' => FALSE,
-        'delivery_delays' => FALSE,
-        'subscriptions' => FALSE,
-        'opens' => FALSE,
-        'clicks' => FALSE,
+        'sends'              => true,
+        'rendering_failures' => false,
+        'rejects'            => false,
+        'deliveries'         => true,
+        'bounces'            => true,
+        'complaints'         => false,
+        'delivery_delays'    => false,
+        'subscriptions'      => false,
+        'opens'              => false,
+        'clicks'             => false,
     ],
 
     /*
@@ -112,7 +112,7 @@ return [
     | Route names
     |--------------------------------------------------------------------------
     |
-    |   Define the route names to use for the SNS notifications to be routed to. These will be 
+    |   Define the route names to use for the SNS notifications to be routed to. These will be
     |   automatically setup for use. The general syntax is:
     |       scheme://domain/prefix/route
     |   Example based on defaults:
@@ -123,16 +123,16 @@ return [
     |
     */
     'routes' => [
-        'sends' => 'sends',
+        'sends'              => 'sends',
         'rendering_failures' => 'rendering-failures',
-        'rejects' => 'rejects',
-        'deliveries' => 'deliveries',
-        'bounces' => 'hard-bounces',
-        'complaints' => 'complaints',
-        'delivery_delays' => 'delivery-delays',
-        'subscriptions' => 'subscriptions',
-        'opens' => 'opens',
-        'clicks' => 'clicks',
+        'rejects'            => 'rejects',
+        'deliveries'         => 'deliveries',
+        'bounces'            => 'hard-bounces',
+        'complaints'         => 'complaints',
+        'delivery_delays'    => 'delivery-delays',
+        'subscriptions'      => 'subscriptions',
+        'opens'              => 'opens',
+        'clicks'             => 'clicks',
     ],
 
     /*
@@ -156,7 +156,7 @@ return [
     |	Type: bool
     |
     */
-    'topic_name_as_suffix' => TRUE,
+    'topic_name_as_suffix' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -168,20 +168,20 @@ return [
     |   Note: The names are used only if the corresponding event is enabled under the 'active' key.
     |	Type: array
     |
-    */    
+    */
     'destination_names' => [
-        'sends' => 'sns',
+        'sends'              => 'sns',
         'rendering_failures' => 'sns',
-        'rejects' => 'sns',
-        'deliveries' => 'sns',
-        'bounces' => 'sns',
-        'complaints' => 'sns',
-        'delivery_delays' => 'sns',
-        'subscriptions' => 'sns',
-        'opens' => 'sns',
-        'clicks' => 'sns',
+        'rejects'            => 'sns',
+        'deliveries'         => 'sns',
+        'bounces'            => 'sns',
+        'complaints'         => 'sns',
+        'delivery_delays'    => 'sns',
+        'subscriptions'      => 'sns',
+        'opens'              => 'sns',
+        'clicks'             => 'sns',
     ],
-    
+
     /*
     |--------------------------------------------------------------------------
     | Event Destination Suffix
@@ -210,8 +210,8 @@ return [
         |--------------------------------------------------------------------------
         | ConfigurationSetName
         |--------------------------------------------------------------------------
-        |   
-        |   The name of the configuration set. 
+        |
+        |   The name of the configuration set.
         |   The name can contain up to 64 alphanumeric characters, including letters, numbers, hyphens (-) and underscores (_) only.
         |	Type: string
         |   REQUIRED: YES
@@ -283,7 +283,7 @@ return [
             |   Type: boolean
             |
             */
-            'ReputationMetricsEnabled' => FALSE,
+            'ReputationMetricsEnabled' => false,
         ],
 
         /*
@@ -304,9 +304,9 @@ return [
             |   Type: boolean
             |
             */
-            'SendingEnabled' => TRUE,
+            'SendingEnabled' => true,
         ],
-        
+
         /*
         |--------------------------------------------------------------------------
         | SuppressionOptions
@@ -357,14 +357,14 @@ return [
             |--------------------------------------------------------------------------
             |
             |	The domain to use for tracking open and click events.
-            |   Type: string|null    
+            |   Type: string|null
             |   REQUIRED: NO <Set to null to remove from the method calls.>
             |
             */
             'CustomRedirectDomain' => null,
         ],
     ],
-    
+
     /*
     |--------------------------------------------------------------------------
     | Topic Name Prefix
@@ -389,18 +389,18 @@ return [
     |
     */
     'topic_names' => [
-        'sends' => 'sends',
+        'sends'              => 'sends',
         'rendering_failures' => 'rendering-failures',
-        'rejects' => 'rejects',
-        'deliveries' => 'deliveries',
-        'bounces' => 'hard-bounces',
-        'complaints' => 'complaints',
-        'delivery_delays' => 'delivery-delays',
-        'subscriptions' => 'subscriptions',
-        'opens' => 'opens',
-        'clicks' => 'clicks',
+        'rejects'            => 'rejects',
+        'deliveries'         => 'deliveries',
+        'bounces'            => 'hard-bounces',
+        'complaints'         => 'complaints',
+        'delivery_delays'    => 'delivery-delays',
+        'subscriptions'      => 'subscriptions',
+        'opens'              => 'opens',
+        'clicks'             => 'clicks',
     ],
-    
+
     /*
     |--------------------------------------------------------------------------
     | Topic Name Suffix
@@ -539,11 +539,11 @@ return [
         | RedrivePolicy
         |--------------------------------------------------------------------------
         |
-        |	When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue. 
+        |	When specified, sends undeliverable messages to the specified Amazon SQS dead-letter queue.
         |   Type: string <ARN>|null
         |   REQUIRED: NO <Set to null to remove from the method calls.>
         |
         */
         'RedrivePolicy' => null,
-    ]
+    ],
 ];
