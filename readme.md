@@ -1,5 +1,9 @@
 # Laravel SES Tracking
-[![StyleCI](https://github.styleci.io/repos/480182263/shield?branch=main)](https://github.styleci.io/repos/480182263?branch=main)
+[![Latest Stable Version](http://poser.pugx.org/akhan619/laravel-ses-tracking/v)](https://packagist.org/packages/akhan619/laravel-ses-tracking)
+[![PHP Version Require](http://poser.pugx.org/akhan619/laravel-ses-tracking/require/php)](https://packagist.org/packages/akhan619/laravel-ses-tracking)
+[![Total Downloads](http://poser.pugx.org/akhan619/laravel-ses-tracking/downloads)](https://packagist.org/packages/akhan619/laravel-ses-tracking)
+[![StyleCI](https://github.styleci.io/repos/480182263/shield?branch=main&style=flat)](https://github.styleci.io/repos/480182263?branch=main)
+[![License](http://poser.pugx.org/akhan619/laravel-ses-tracking/license)](https://packagist.org/packages/akhan619/laravel-ses-tracking)
 
 Setup the AWS infrastructure to handle email events using SES/SNS and http/s endpoints with a single Laravel artisan command. This package is unopinionated in the sense that every setting can be changed as per your requirements. It follows an interactive CLI based setup process so that you know exactly what will be configured. Also, includes a debug mode where you can see all the settings and configurations that will be used without actually making the API calls. Finally, it can be very painful to clean up the AWS resources when an API call fails. For example, if you are trying to enable some advanced filter policy for an endpoint, only for that setting to fail, then you might have to go back and remove the configuration sets and SNS topics manually. To tackle the issue, the package will automatically try and revert any changes made to the AWS infrastructure when any exceptions occur.
 
@@ -182,7 +186,7 @@ Routes are customizable for each event by specifying values for the `route_prefi
     'rendering_failures' => 'rendering-failures',
     'rejects' => 'rejects',
     'deliveries' => 'deliveries',
-    'bounces' => 'hard-bounces',
+    'bounces' => 'bounces',
     'complaints' => 'complaints',
     'delivery_delays' => 'delivery-delays',
     'subscriptions' => 'subscriptions',
@@ -208,7 +212,7 @@ The output looks like (_based on a fresh laravel project with default values_):
 | ------------------------- |:-----------|
 | sends                     | https://localhost/email/notification/sends |
 | deliveries                | https://localhost/email/notification/deliveries |
-| bounces                   | https://localhost/email/notification/hard-bounces |
+| bounces                   | https://localhost/email/notification/bounces |
 
 ## Configuration Set
 
@@ -262,7 +266,7 @@ Similar to route names, the topic name that is generated for every event can be 
     'rendering_failures' => 'rendering-failures',
     'rejects' => 'rejects',
     'deliveries' => 'deliveries',
-    'bounces' => 'hard-bounces',
+    'bounces' => 'bounces',
     'complaints' => 'complaints',
     'delivery_delays' => 'delivery-delays',
     'subscriptions' => 'subscriptions',
@@ -298,7 +302,7 @@ The output looks like (_based on a fresh laravel project with default values_):
 | ------------------------- |:-----------|
 | sends                     | Laravel-sends-us-east-1 |
 | deliveries                | Laravel-deliveries-us-east-1 |
-| bounces                   | Laravel-hard-bounces-us-east-1 |
+| bounces                   | Laravel-bounces-us-east-1 |
 
 ## Event Destination Names
 
@@ -345,7 +349,7 @@ The output looks like (_based on a fresh laravel project with default values_):
 | ------------------------- |:-----------|
 | sends                     | destination-sns-Laravel-sends-us-east-1 |
 | deliveries                | destination-sns-Laravel-deliveries-us-east-1 |
-| bounces                   | destination-sns-Laravel-hard-bounces-us-east-1 |
+| bounces                   | destination-sns-Laravel-bounces-us-east-1 |
 
 ## Subscription Configuration
 
