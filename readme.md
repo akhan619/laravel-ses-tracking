@@ -399,7 +399,7 @@ $ composer test
 
 -   ~~Add tests!!!~~
 -   Add a option to the command to answer yes to all confirmations.
--   Add a seperate command to delete the AWS resources that were created. A was for users to test and clear.
+-   Add a seperate command to delete the AWS resources that were created. A way for users to test and clear AWS resources.
 -   Add other protocols such as SQS.
 
 

@@ -50,7 +50,7 @@ class SesManager
             $this->prettyPrintArray($this->sesDataManager->getConfigurationSet(), 'Configuration Set Data');
         } else {
             $this->sendCreationRequest();
-            $this->console->io->success('Configuration Set Creation');
+            $this->console->getIo()->success('Configuration Set Creation');
         }
     }
 
@@ -84,7 +84,7 @@ class SesManager
             return [$key, $value];
         }, array_keys($this->enabledDestinationNames), array_values($this->enabledDestinationNames));
 
-        $this->console->io->table(['Event', 'Event Destination Name'], $tableData);
+        $this->console->getIo()->table(['Event', 'Event Destination Name'], $tableData);
         $response = $this->debug ? true : $this->console->confirm('Do you wish to proceed?');
 
         return $response ? $this->enabledDestinationNames : false;

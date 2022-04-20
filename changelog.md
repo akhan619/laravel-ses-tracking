@@ -2,6 +2,9 @@
 
 All notable changes to `LaravelSesTracking` will be documented in this file.
 
+## Version 1.0.5
+- StyleCI prettiness.
+
 ## Version 1.0.4
 - Added tests to the project.
 - Changed badge style as old style wans't working for downloads.

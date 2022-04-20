@@ -3,8 +3,10 @@
 namespace Akhan619\LaravelSesTracking\Tests\Unit;
 
 use Akhan619\LaravelSesTracking\App\Implementations\AwsCredentialsManager;
+use Akhan619\LaravelSesTracking\Console\Commands\SetupTrackingCommand;
 use Akhan619\LaravelSesTracking\LaravelSesTrackingServiceProvider;
 use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
+use \Mockery;
 
 class AwsCredentialsManagerTest extends UnitTestCase
 {
@@ -18,6 +20,12 @@ class AwsCredentialsManagerTest extends UnitTestCase
             // Code should not reach this point in tests. If they do, something is wrong somewhere.
             $this->markTestSkipped('Skipping all tests as debug mode is disabled.');
         }
+    }
+
+    protected function tearDown(): void
+    {
+        Mockery::close();
+        parent::tearDown();
     }
 
     /**
@@ -68,6 +76,11 @@ class AwsCredentialsManagerTest extends UnitTestCase
         $this->assertTrue($obj->validateAwsAccessKeyId());
         $this->assertTrue($obj->validateAwsSecretAccessKey());
         $this->assertTrue($obj->validateAwsDefaultRegion());
+
+        $console = Mockery::mock(SetupTrackingCommand::class);
+        $console->shouldReceive('getIo->success')->once();
+
+        $obj->validateForCli($console);
     }
 
     protected function setIncorrectValuesForValidation($app)
@@ -89,5 +102,10 @@ class AwsCredentialsManagerTest extends UnitTestCase
         $this->assertFalse($obj->validateAwsAccessKeyId());
         $this->assertFalse($obj->validateAwsSecretAccessKey());
         $this->assertFalse($obj->validateAwsDefaultRegion());
+
+        $console = Mockery::mock(SetupTrackingCommand::class);
+        $console->shouldReceive('getIo->error')->times(4);
+
+        $obj->validateForCli($console);
     }
 }

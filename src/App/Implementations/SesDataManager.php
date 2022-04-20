@@ -511,9 +511,9 @@ class SesDataManager implements SesDataContract
         }) && $checkPassed;
 
         if (!$checkPassed) {
-            $console->io->error('Please specify the SES data in the '.$this->configName.' config file.');
+            $console->getIo()->error('Please specify the SES data in the '.$this->configName.' config file.');
         } else {
-            $console->io->success('SES Data Check');
+            $console->getIo()->success('SES Data Check');
         }
 
         return $checkPassed;
@@ -527,7 +527,7 @@ class SesDataManager implements SesDataContract
     protected function validate(string $errorMsg, bool $condition, SetupTrackingCommand $console): void
     {
         if (!$condition) {
-            $console->io->error($errorMsg);
+            $console->getIo()->error($errorMsg);
         }
     }
 }

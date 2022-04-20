@@ -15,7 +15,7 @@ trait PrintsToConsole
      */
     protected function prettyPrintArray(array $data, string $name): void
     {
-        $this->console->io->title($name);
+        $this->console->getIo()->title($name);
         $this->arrayWalkRecursiveWithKey($data, 1);
         $this->console->newLine();
     }

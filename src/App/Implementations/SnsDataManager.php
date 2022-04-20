@@ -491,9 +491,9 @@ class SnsDataManager implements SnsDataContract
         }) && $checkPassed;
 
         if (!$checkPassed) {
-            $console->io->error('Please specify the SNS data in the '.$this->configName.' config file.');
+            $console->getIo()->error('Please specify the SNS data in the '.$this->configName.' config file.');
         } else {
-            $console->io->success('SNS Data Check');
+            $console->getIo()->success('SNS Data Check');
         }
 
         return $checkPassed;
@@ -507,7 +507,7 @@ class SnsDataManager implements SnsDataContract
     protected function validate(string $errorMsg, bool $condition, SetupTrackingCommand $console): void
     {
         if (!$condition) {
-            $console->io->error($errorMsg);
+            $console->getIo()->error($errorMsg);
         }
     }
 }

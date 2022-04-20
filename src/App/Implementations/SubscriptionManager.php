@@ -111,9 +111,9 @@ class SubscriptionManager implements SubscriptionContract
         }) && $checkPassed;
 
         if (!$checkPassed) {
-            $console->io->error('Please specify the Subscription details in the '.$this->configName.' config file.');
+            $console->getIo()->error('Please specify the Subscription details in the '.$this->configName.' config file.');
         } else {
-            $console->io->success('Subscription Data Check');
+            $console->getIo()->success('Subscription Data Check');
         }
 
         return $checkPassed;
@@ -127,7 +127,7 @@ class SubscriptionManager implements SubscriptionContract
     protected function validate(string $errorMsg, bool $condition, SetupTrackingCommand $console): void
     {
         if (!$condition) {
-            $console->io->error($errorMsg);
+            $console->getIo()->error($errorMsg);
         }
     }
 }

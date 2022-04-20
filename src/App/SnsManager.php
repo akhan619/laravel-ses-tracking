@@ -52,7 +52,7 @@ class SnsManager
             $this->console->newLine();
 
             if (!empty($matches)) {
-                $this->console->io->listing($matches);
+                $this->console->getIo()->listing($matches);
 
                 throw new Exception('Duplicate topic names. The above topics already exist.');
             }
@@ -144,7 +144,7 @@ class SnsManager
             return [$key, $value];
         }, array_keys($this->enabledTopicNames), array_values($this->enabledTopicNames));
 
-        $this->console->io->table(['Event', 'Topic Name'], $tableData);
+        $this->console->getIo()->table(['Event', 'Topic Name'], $tableData);
         $response = $this->debug ? true : $this->console->confirm('Do you wish to proceed?');
 
         return $response ? $this->enabledTopicNames : false;
@@ -233,7 +233,7 @@ class SnsManager
 
         if (!$this->debug) {
             $this->console->newLine();
-            $this->console->io->table(['Event', 'SubscriptionArn'], $subscriptionArns);
+            $this->console->getIo()->table(['Event', 'SubscriptionArn'], $subscriptionArns);
             $this->console->newLine();
         }
     }

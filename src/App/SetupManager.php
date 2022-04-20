@@ -163,7 +163,7 @@ class SetupManager
         }
 
         if (!$this->debug) {
-            $this->console->io->success('Successfully completed Event subscription process.');
+            $this->console->getIo()->success('Successfully completed Event subscription process.');
         }
     }
 
@@ -181,7 +181,7 @@ class SetupManager
         $this->ses->deleteCurrentConfigurationSet();
         $this->sns->deleteCurrentTopics();
 
-        $this->console->io->success('Environment Clean State');
+        $this->console->getIo()->success('Environment Clean State');
     }
 
     /**
@@ -191,7 +191,7 @@ class SetupManager
      */
     protected function prettyPrint(string $msg): void
     {
-        $this->console->io->title($msg);
+        $this->console->getIo()->title($msg);
     }
 
     /**
@@ -212,7 +212,7 @@ class SetupManager
      */
     protected function awsError(AwsException $e): void
     {
-        $this->console->io->error(
+        $this->console->getIo()->error(
             $e->getAwsErrorCode().' - '.$e->getAwsErrorType().' - '.$e->getAwsErrorMessage()
         );
     }
@@ -224,7 +224,7 @@ class SetupManager
      */
     protected function error(\Throwable $th): void
     {
-        $this->console->io->error(
+        $this->console->getIo()->error(
             get_class($th).' - '.$th->getCode().' - '.$th->getMessage()
         );
     }

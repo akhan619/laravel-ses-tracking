@@ -3,10 +3,11 @@
 namespace Akhan619\LaravelSesTracking\Tests\Unit;
 
 use Akhan619\LaravelSesTracking\App\Implementations\SubscriptionManager;
+use Akhan619\LaravelSesTracking\Console\Commands\SetupTrackingCommand;
 use Akhan619\LaravelSesTracking\App\Implementations\WebhooksManager;
 use Akhan619\LaravelSesTracking\LaravelSesTrackingServiceProvider;
 use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
-use Mockery;
+use \Mockery;
 
 class WebhooksManagerTest extends UnitTestCase
 {
@@ -114,13 +115,13 @@ class WebhooksManagerTest extends UnitTestCase
     {
         $subscriptionMgr = Mockery::mock(SubscriptionManager::class);
         $subscriptionMgr->shouldReceive('getEnabledEvents')
-        ->twice()
+        ->times(3)
         ->andReturn([
             'sends'              => true,
             'rendering_failures' => true,
         ])
         ->shouldReceive('getEnabledSubscriber')
-        ->once()
+        ->twice()
         ->andReturn('https');
 
         $obj = new WebhooksManager(LaravelSesTrackingServiceProvider::$configName, $subscriptionMgr);
@@ -130,6 +131,11 @@ class WebhooksManagerTest extends UnitTestCase
         $this->assertTrue($obj->validateScheme());
         $this->assertTrue($obj->validateRoutePrefix());
         $this->assertTrue($obj->validateDefinedRoutes());
+
+        $console = Mockery::mock(SetupTrackingCommand::class);
+        $console->shouldReceive('getIo->success')->once();
+
+        $obj->validateForCli($console);
     }
 
     protected function setIncorrectValuesForValidation($app)
@@ -153,7 +159,7 @@ class WebhooksManagerTest extends UnitTestCase
     {
         $subscriptionMgr = Mockery::mock(SubscriptionManager::class);
         $subscriptionMgr->shouldReceive('getEnabledEvents')
-        ->twice()
+        ->times(3)
         ->andReturn(
             [
                 'sends'              => true,
@@ -163,10 +169,15 @@ class WebhooksManagerTest extends UnitTestCase
                 'sends'                 => true,
                 'rendering_failures'    => true,
                 'deliveries'            => true,
+            ],
+            [
+                'sends'                 => true,
+                'rendering_failures'    => true,
+                'deliveries'            => true,
             ]
         )
         ->shouldReceive('getEnabledSubscriber')
-        ->once()
+        ->twice()
         ->andReturn('http');
 
         $obj = new WebhooksManager(LaravelSesTrackingServiceProvider::$configName, $subscriptionMgr);
@@ -176,5 +187,53 @@ class WebhooksManagerTest extends UnitTestCase
         $this->assertFalse($obj->validateScheme());
         $this->assertFalse($obj->validateRoutePrefix());
         $this->assertFalse($obj->validateDefinedRoutes());
+
+        $console = Mockery::mock(SetupTrackingCommand::class);
+        $console->shouldReceive('getIo->error')->times(5);
+
+        $obj->validateForCli($console);
+    }
+
+    /**
+     * @test
+     * @define-env setCorrectValuesForValidation
+     */
+    public function confirmRouteInfoPrintsTheCorrectDataToConsole()
+    {
+        app()->make('config')->set(LaravelSesTrackingServiceProvider::$configName.'.debug', false);
+        $subscriptionMgr = Mockery::mock(SubscriptionManager::class);
+        $subscriptionMgr->shouldReceive('getEnabledEvents')
+        ->once()
+        ->andReturn([
+            'sends'              => true,
+            'rendering_failures' => true,
+        ]);
+
+        $obj = new WebhooksManager(LaravelSesTrackingServiceProvider::$configName, $subscriptionMgr);
+        $obj->getWebhookData();
+
+        $console = Mockery::spy(SetupTrackingCommand::class);
+        $console->shouldReceive('info')
+        ->once()
+        ->with('The following routes will be created and registered as endpoints for SNS subscription.');
+
+        $console->shouldReceive('newLine')
+        ->once();
+
+        $console->shouldReceive('getIo->table')
+        ->once()
+        ->with(['Event', 'Route Name'], [
+            ['sends', 'https://example.com/notifications/send-101'],
+            ['rendering_failures', 'https://example.com/notifications/rendering-failures-101']
+        ]);
+
+        $console->shouldReceive('confirm')
+        ->once()
+        ->with('Do you wish to proceed?')
+        ->andReturn(false);
+
+        $obj->confirmRouteInfo($console);
+
+        $this->assertTrue(true);
     }
 }

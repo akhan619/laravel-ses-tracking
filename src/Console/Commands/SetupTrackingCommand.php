@@ -39,4 +39,14 @@ class SetupTrackingCommand extends Command
         $this->io = new SymfonyStyle($this->input, $this->output);
         SetupManager::create($this);
     }
+
+    /**
+    * Get the SymfonyStyle instance
+    *
+    * @return SymfonyStyle
+    */
+    public function getIo()
+    {
+        return $this->io;
+    }
 }

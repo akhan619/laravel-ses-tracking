@@ -26,6 +26,7 @@ abstract class UnitTestCase extends BaseTestCase
 
     protected function getEnvironmentSetUp($app)
     {
+        // Enable debug mode so no API calls are made. Individual tests may enable debug mode with mocked elements.
         $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.debug', true);
     }
 }

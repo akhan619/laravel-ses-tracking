@@ -3,8 +3,10 @@
 namespace Akhan619\LaravelSesTracking\Tests\Unit;
 
 use Akhan619\LaravelSesTracking\App\Implementations\SubscriptionManager;
+use Akhan619\LaravelSesTracking\Console\Commands\SetupTrackingCommand;
 use Akhan619\LaravelSesTracking\LaravelSesTrackingServiceProvider;
 use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
+use \Mockery;
 
 class SubscriptionManagerTest extends UnitTestCase
 {
@@ -18,6 +20,12 @@ class SubscriptionManagerTest extends UnitTestCase
             // Code should not reach this point in tests. If they do, something is wrong somewhere.
             $this->markTestSkipped('Skipping all tests as debug mode is disabled.');
         }
+    }
+
+    protected function tearDown(): void
+    {
+        Mockery::close();
+        parent::tearDown();
     }
 
     /**
@@ -102,6 +110,11 @@ class SubscriptionManagerTest extends UnitTestCase
 
         $this->assertTrue($obj->validateEnabledEvents());
         $this->assertTrue($obj->validateEnabledSubscriber());
+
+        $console = Mockery::mock(SetupTrackingCommand::class);
+        $console->shouldReceive('getIo->success')->once();
+
+        $obj->validateForCli($console);
     }
 
     protected function setIncorrectValuesForValidation($app)
@@ -136,5 +149,10 @@ class SubscriptionManagerTest extends UnitTestCase
 
         $this->assertFalse($obj->validateEnabledEvents());
         $this->assertFalse($obj->validateEnabledSubscriber());
+
+        $console = Mockery::mock(SetupTrackingCommand::class);
+        $console->shouldReceive('getIo->error')->times(3);
+
+        $obj->validateForCli($console);
     }
 }

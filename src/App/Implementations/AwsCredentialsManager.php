@@ -130,9 +130,9 @@ class AwsCredentialsManager implements AwsCredentialsContract
         }) && $checkPassed;
 
         if (!$checkPassed) {
-            $console->io->error('Please specify the AWS details in the '.$this->configName.' config file or in the environment file.');
+            $console->getIo()->error('Please specify the AWS details in the '.$this->configName.' config file or in the environment file.');
         } else {
-            $console->io->success('AWS Credentials Check');
+            $console->getIo()->success('AWS Credentials Check');
         }
 
         return $checkPassed;
@@ -146,7 +146,7 @@ class AwsCredentialsManager implements AwsCredentialsContract
     protected function validate(string $errorMsg, bool $condition, SetupTrackingCommand $console): void
     {
         if (!$condition) {
-            $console->io->error($errorMsg);
+            $console->getIo()->error($errorMsg);
         }
     }
 }

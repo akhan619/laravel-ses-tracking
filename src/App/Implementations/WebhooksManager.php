@@ -201,9 +201,9 @@ class WebhooksManager implements WebhooksContract
         }) && $checkPassed;
 
         if (!$checkPassed) {
-            $console->io->error('Please specify the Webhook details in the '.$this->configName.' config file.');
+            $console->getIo()->error('Please specify the Webhook details in the '.$this->configName.' config file.');
         } else {
-            $console->io->success('Webhooks Data Check');
+            $console->getIo()->success('Webhooks Data Check');
         }
 
         return $checkPassed;
@@ -217,7 +217,7 @@ class WebhooksManager implements WebhooksContract
     protected function validate(string $errorMsg, bool $condition, SetupTrackingCommand $console): void
     {
         if (!$condition) {
-            $console->io->error($errorMsg);
+            $console->getIo()->error($errorMsg);
         }
     }
 
@@ -235,7 +235,7 @@ class WebhooksManager implements WebhooksContract
             return [$key, $value];
         }, array_keys($this->routesToRegister), array_values($this->routesToRegister));
 
-        $console->io->table(['Event', 'Route Name'], $tableData);
+        $console->getIo()->table(['Event', 'Route Name'], $tableData);
 
         return $this->debug ? true : $console->confirm('Do you wish to proceed?');
     }

@@ -3,8 +3,10 @@
 namespace Akhan619\LaravelSesTracking\Tests\Unit;
 
 use Akhan619\LaravelSesTracking\App\Implementations\SesDataManager;
+use Akhan619\LaravelSesTracking\Console\Commands\SetupTrackingCommand;
 use Akhan619\LaravelSesTracking\LaravelSesTrackingServiceProvider;
 use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
+use \Mockery;
 
 class SesDataManagerTest extends UnitTestCase
 {
@@ -18,6 +20,12 @@ class SesDataManagerTest extends UnitTestCase
             // Code should not reach this point in tests. If they do, something is wrong somewhere.
             $this->markTestSkipped('Skipping all tests as debug mode is disabled.');
         }
+    }
+
+    protected function tearDown(): void
+    {
+        Mockery::close();
+        parent::tearDown();
     }
 
     /**
@@ -145,6 +153,11 @@ class SesDataManagerTest extends UnitTestCase
         $this->assertTrue($obj->validateSuppressedReasons());
         $this->assertTrue($obj->validateTags());
         $this->assertTrue($obj->validateCustomRedirectDomain());
+
+        $console = Mockery::mock(SetupTrackingCommand::class);
+        $console->shouldReceive('getIo->success')->once();
+
+        $obj->validateForCli($console);
     }
 
     protected function setIncorrectValuesForValidation($app)
@@ -197,5 +210,10 @@ class SesDataManagerTest extends UnitTestCase
         // $this->assertFalse($obj->validateSuppressedReasons());
         $this->assertFalse($obj->validateTags());
         $this->assertFalse($obj->validateCustomRedirectDomain());
+
+        $console = Mockery::mock(SetupTrackingCommand::class);
+        $console->shouldReceive('getIo->error')->times(10);
+
+        $obj->validateForCli($console);
     }
 }
