@@ -17,7 +17,7 @@ use Illuminate\Support\ServiceProvider;
 
 class LaravelSesTrackingServiceProvider extends ServiceProvider
 {
-    protected static string $configName = 'laravel-ses-tracking';
+    public static string $configName = 'laravel-ses-tracking';
 
     /**
      * Perform post-registration booting of services.

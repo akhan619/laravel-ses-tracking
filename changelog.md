@@ -2,6 +2,10 @@
 
 All notable changes to `LaravelSesTracking` will be documented in this file.
 
+## Version 1.0.4
+- Added tests to the project.
+- Changed badge style as old style wans't working for downloads.
+
 ## Version 1.0.3
 - Fixed text in readme.md to correct 'hard-bounces' to 'bounces'
 - Added badges to readme.md

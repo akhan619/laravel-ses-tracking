@@ -17,7 +17,15 @@
     },
     "require-dev": {
         "phpunit/phpunit": "~9.0",
-        "orchestra/testbench": "^7.0"
+        "orchestra/testbench": "^7.0",
+        "sempro/phpunit-pretty-print": "^1.4",
+        "mockery/mockery": "^1.5"
+    },    
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-unit": "vendor/bin/phpunit --testsuite Unit",
+        "test-feature": "vendor/bin/phpunit --testsuite Feature",
+        "test-f": "vendor/bin/phpunit --filter"
     },
     "autoload": {
         "psr-4": {
