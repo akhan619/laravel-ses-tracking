@@ -27,7 +27,7 @@ class PackageServiceProviderTest extends UnitTestCase
     {
         $this->assertTrue(app()->bound(SubscriptionContract::class));
     }
-    
+
     /**
      * @test
      */
@@ -35,7 +35,7 @@ class PackageServiceProviderTest extends UnitTestCase
     {
         $this->assertTrue(app()->bound(WebhooksContract::class));
     }
-    
+
     /**
      * @test
      */
@@ -43,7 +43,7 @@ class PackageServiceProviderTest extends UnitTestCase
     {
         $this->assertTrue(app()->bound(SnsDataContract::class));
     }
-    
+
     /**
      * @test
      */
@@ -51,7 +51,7 @@ class PackageServiceProviderTest extends UnitTestCase
     {
         $this->assertTrue(app()->bound(SesDataContract::class));
     }
-    
+
     /**
      * @test
      */
@@ -59,6 +59,6 @@ class PackageServiceProviderTest extends UnitTestCase
     {
         $this->assertTrue(isset(LaravelSesTrackingServiceProvider::$configName));
         $this->assertTrue(!empty(LaravelSesTrackingServiceProvider::$configName));
-        $this->assertTrue(file_exists(__DIR__ . "/../../config/" . LaravelSesTrackingServiceProvider::$configName . '.php'));
+        $this->assertTrue(file_exists(__DIR__.'/../../config/'.LaravelSesTrackingServiceProvider::$configName.'.php'));
     }
 }
