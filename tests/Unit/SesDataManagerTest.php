@@ -3,8 +3,8 @@
 namespace Akhan619\LaravelSesTracking\Tests\Unit;
 
 use Akhan619\LaravelSesTracking\App\Implementations\SesDataManager;
-use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
 use Akhan619\LaravelSesTracking\LaravelSesTrackingServiceProvider;
+use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
 
 class SesDataManagerTest extends UnitTestCase
 {
@@ -14,7 +14,7 @@ class SesDataManagerTest extends UnitTestCase
     {
         parent::setUp();
 
-        if(config(LaravelSesTrackingServiceProvider::$configName . '.debug') === false) {
+        if (config(LaravelSesTrackingServiceProvider::$configName.'.debug') === false) {
             // Code should not reach this point in tests. If they do, something is wrong somewhere.
             $this->markTestSkipped('Skipping all tests as debug mode is disabled.');
         }
@@ -28,12 +28,12 @@ class SesDataManagerTest extends UnitTestCase
         $obj = new SesDataManager(LaravelSesTrackingServiceProvider::$configName);
 
         $this->assertCount(13, $obj->getSesData());
-    }    
+    }
 
     protected function setDataInConfig($app)
     {
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.event_destination_prefix', 'val1');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.destination_names', [
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.event_destination_prefix', 'val1');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.destination_names', [
             'sends'              => 'sns',
             'rendering_failures' => 'sns',
             'rejects'            => 'sns',
@@ -45,17 +45,17 @@ class SesDataManagerTest extends UnitTestCase
             'opens'              => 'sns',
             'clicks'             => 'sns',
         ]);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.event_destination_suffix', 'val2');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.topic_name_as_suffix', true);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.ConfigurationSetName', 'testing-101');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.DeliveryOptions.SendingPoolName', null);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.DeliveryOptions.TlsPolicy', 'REQUIRE');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.ReputationOptions.LastFreshStart', null);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.ReputationOptions.ReputationMetricsEnabled', false);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.SendingOptions.SendingEnabled', true);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.SuppressionOptions.SuppressedReasons', []);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.Tags', []);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.TrackingOptions.CustomRedirectDomain', null);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.event_destination_suffix', 'val2');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.topic_name_as_suffix', true);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.ConfigurationSetName', 'testing-101');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.DeliveryOptions.SendingPoolName', null);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.DeliveryOptions.TlsPolicy', 'REQUIRE');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.ReputationOptions.LastFreshStart', null);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.ReputationOptions.ReputationMetricsEnabled', false);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.SendingOptions.SendingEnabled', true);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.SuppressionOptions.SuppressedReasons', []);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.Tags', []);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.TrackingOptions.CustomRedirectDomain', null);
     }
 
     /**
@@ -93,12 +93,12 @@ class SesDataManagerTest extends UnitTestCase
             [],
             null,
         ], $result);
-    }    
+    }
 
     protected function setCorrectValuesForValidation($app)
     {
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.event_destination_prefix', 'val1');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.destination_names', [
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.event_destination_prefix', 'val1');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.destination_names', [
             'sends'              => 'sns',
             'rendering_failures' => 'sns',
             'rejects'            => 'sns',
@@ -110,17 +110,17 @@ class SesDataManagerTest extends UnitTestCase
             'opens'              => 'sns',
             'clicks'             => 'sns',
         ]);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.event_destination_suffix', 'val2');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.topic_name_as_suffix', true);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.ConfigurationSetName', 'testing-101');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.DeliveryOptions.SendingPoolName', null);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.DeliveryOptions.TlsPolicy', 'REQUIRE');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.ReputationOptions.LastFreshStart', null);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.ReputationOptions.ReputationMetricsEnabled', false);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.SendingOptions.SendingEnabled', true);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.SuppressionOptions.SuppressedReasons', []);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.Tags', []);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.TrackingOptions.CustomRedirectDomain', null);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.event_destination_suffix', 'val2');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.topic_name_as_suffix', true);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.ConfigurationSetName', 'testing-101');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.DeliveryOptions.SendingPoolName', null);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.DeliveryOptions.TlsPolicy', 'REQUIRE');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.ReputationOptions.LastFreshStart', null);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.ReputationOptions.ReputationMetricsEnabled', false);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.SendingOptions.SendingEnabled', true);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.SuppressionOptions.SuppressedReasons', []);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.Tags', []);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.TrackingOptions.CustomRedirectDomain', null);
     }
 
     /**
@@ -131,7 +131,7 @@ class SesDataManagerTest extends UnitTestCase
     {
         $obj = new SesDataManager(LaravelSesTrackingServiceProvider::$configName);
         $obj->getSesData();
-        
+
         $this->assertTrue($obj->validateEventDestinationPrefix());
         $this->assertTrue($obj->validateDestinationNames());
         $this->assertTrue($obj->validateEventDestinationSuffix());
@@ -145,12 +145,12 @@ class SesDataManagerTest extends UnitTestCase
         $this->assertTrue($obj->validateSuppressedReasons());
         $this->assertTrue($obj->validateTags());
         $this->assertTrue($obj->validateCustomRedirectDomain());
-    }      
+    }
 
     protected function setIncorrectValuesForValidation($app)
     {
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.event_destination_prefix', '');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.destination_names', [
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.event_destination_prefix', '');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.destination_names', [
             'sends'              => 'sns',
             'rendering_failures' => 'sns',
             'rejects'            => 'sns',
@@ -162,17 +162,17 @@ class SesDataManagerTest extends UnitTestCase
             'opens'              => 'sns',
             'clicks'             => 'sns',
         ]);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.event_destination_suffix', '');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.event_destination_suffix', '');
         // $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.topic_name_as_suffix', true);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.ConfigurationSetName', '');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.DeliveryOptions.SendingPoolName', '');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.DeliveryOptions.TlsPolicy', 'BATMAN');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.ReputationOptions.LastFreshStart', '');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.ConfigurationSetName', '');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.DeliveryOptions.SendingPoolName', '');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.DeliveryOptions.TlsPolicy', 'BATMAN');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.ReputationOptions.LastFreshStart', '');
         // $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.ReputationOptions.ReputationMetricsEnabled', false);
         // $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.SendingOptions.SendingEnabled', true);
         // $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.SuppressionOptions.SuppressedReasons', []);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.Tags', ['Random Value']);
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.configuration_set.TrackingOptions.CustomRedirectDomain', '');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.Tags', ['Random Value']);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.TrackingOptions.CustomRedirectDomain', '');
     }
 
     /**
@@ -183,7 +183,7 @@ class SesDataManagerTest extends UnitTestCase
     {
         $obj = new SesDataManager(LaravelSesTrackingServiceProvider::$configName);
         $obj->getSesData();
-        
+
         $this->assertFalse($obj->validateEventDestinationPrefix());
         $this->assertFalse($obj->validateDestinationNames());
         $this->assertFalse($obj->validateEventDestinationSuffix());
@@ -197,5 +197,5 @@ class SesDataManagerTest extends UnitTestCase
         // $this->assertFalse($obj->validateSuppressedReasons());
         $this->assertFalse($obj->validateTags());
         $this->assertFalse($obj->validateCustomRedirectDomain());
-    }  
+    }
 }

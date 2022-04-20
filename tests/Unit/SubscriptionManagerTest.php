@@ -3,8 +3,8 @@
 namespace Akhan619\LaravelSesTracking\Tests\Unit;
 
 use Akhan619\LaravelSesTracking\App\Implementations\SubscriptionManager;
-use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
 use Akhan619\LaravelSesTracking\LaravelSesTrackingServiceProvider;
+use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
 
 class SubscriptionManagerTest extends UnitTestCase
 {
@@ -14,7 +14,7 @@ class SubscriptionManagerTest extends UnitTestCase
     {
         parent::setUp();
 
-        if(config(LaravelSesTrackingServiceProvider::$configName . '.debug') === false) {
+        if (config(LaravelSesTrackingServiceProvider::$configName.'.debug') === false) {
             // Code should not reach this point in tests. If they do, something is wrong somewhere.
             $this->markTestSkipped('Skipping all tests as debug mode is disabled.');
         }
@@ -28,16 +28,16 @@ class SubscriptionManagerTest extends UnitTestCase
         $obj = new SubscriptionManager(LaravelSesTrackingServiceProvider::$configName);
 
         $this->assertCount(2, $obj->getSubscriptionData());
-    }    
+    }
 
     protected function setDataInConfig($app)
     {
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.subscriber', [
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.subscriber', [
             'http'  => true,
             'https' => false,
         ]);
 
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.active', [
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.active', [
             'sends'              => true,
             'rendering_failures' => false,
             'rejects'            => false,
@@ -68,16 +68,16 @@ class SubscriptionManagerTest extends UnitTestCase
             'subscriptions'      => true,
             'clicks'             => true,
         ], $result[1]);
-    }     
+    }
 
     protected function setCorrectValuesForValidation($app)
     {
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.subscriber', [
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.subscriber', [
             'http'  => false,
             'https' => true,
         ]);
 
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.active', [
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.active', [
             'sends'              => true,
             'rendering_failures' => true,
             'rejects'            => true,
@@ -102,16 +102,16 @@ class SubscriptionManagerTest extends UnitTestCase
 
         $this->assertTrue($obj->validateEnabledEvents());
         $this->assertTrue($obj->validateEnabledSubscriber());
-    }       
+    }
 
     protected function setIncorrectValuesForValidation($app)
     {
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.subscriber', [
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.subscriber', [
             'http'  => true,
             'https' => true,
         ]);
 
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.active', [
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.active', [
             'sends'              => false,
             'rendering_failures' => false,
             'rejects'            => false,
@@ -136,5 +136,5 @@ class SubscriptionManagerTest extends UnitTestCase
 
         $this->assertFalse($obj->validateEnabledEvents());
         $this->assertFalse($obj->validateEnabledSubscriber());
-    }  
+    }
 }

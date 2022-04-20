@@ -4,9 +4,9 @@ namespace Akhan619\LaravelSesTracking\Tests\Unit;
 
 use Akhan619\LaravelSesTracking\App\Implementations\SubscriptionManager;
 use Akhan619\LaravelSesTracking\App\Implementations\WebhooksManager;
-use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
 use Akhan619\LaravelSesTracking\LaravelSesTrackingServiceProvider;
-use \Mockery;
+use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
+use Mockery;
 
 class WebhooksManagerTest extends UnitTestCase
 {
@@ -16,7 +16,7 @@ class WebhooksManagerTest extends UnitTestCase
     {
         parent::setUp();
 
-        if(config(LaravelSesTrackingServiceProvider::$configName . '.debug') === false) {
+        if (config(LaravelSesTrackingServiceProvider::$configName.'.debug') === false) {
             // Code should not reach this point in tests. If they do, something is wrong somewhere.
             $this->markTestSkipped('Skipping all tests as debug mode is disabled.');
         }
@@ -46,14 +46,14 @@ class WebhooksManagerTest extends UnitTestCase
         $obj = new WebhooksManager(LaravelSesTrackingServiceProvider::$configName, $subscriptionMgr);
 
         $this->assertCount(5, $obj->getWebhookData());
-    }    
+    }
 
     protected function setDataInConfig($app)
     {
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.domain', 'example.com');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.scheme', 'https');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.route_prefix', 'notifications');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.routes', [
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.domain', 'example.com');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.scheme', 'https');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.route_prefix', 'notifications');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.routes', [
             'sends'              => 'send-101',
             'rendering_failures' => 'rendering-failures-101',
             'rejects'            => 'rejects-101',
@@ -87,18 +87,18 @@ class WebhooksManagerTest extends UnitTestCase
                 'rendering_failures' => 'rendering-failures-101',
             ],
             [
-                'sends'                 =>  'https://example.com/notifications/send-101',
-                'rendering_failures'    =>  'https://example.com/notifications/rendering-failures-101',
-            ]
+                'sends'                 => 'https://example.com/notifications/send-101',
+                'rendering_failures'    => 'https://example.com/notifications/rendering-failures-101',
+            ],
         ], $result);
-    }    
+    }
 
     protected function setCorrectValuesForValidation($app)
     {
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.domain', 'example.com');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.scheme', 'https');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.route_prefix', 'notifications');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.routes', [
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.domain', 'example.com');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.scheme', 'https');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.route_prefix', 'notifications');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.routes', [
             'sends'              => 'send-101',
             'rendering_failures' => 'rendering-failures-101',
             'rejects'            => 'rejects-101',
@@ -125,19 +125,19 @@ class WebhooksManagerTest extends UnitTestCase
 
         $obj = new WebhooksManager(LaravelSesTrackingServiceProvider::$configName, $subscriptionMgr);
         $obj->getWebhookData();
-        
+
         $this->assertTrue($obj->validateDomain());
         $this->assertTrue($obj->validateScheme());
         $this->assertTrue($obj->validateRoutePrefix());
         $this->assertTrue($obj->validateDefinedRoutes());
-    }      
+    }
 
     protected function setIncorrectValuesForValidation($app)
     {
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.domain', '');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.scheme', 'https');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.route_prefix', '');
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.routes', [
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.domain', '');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.scheme', 'https');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.route_prefix', '');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.routes', [
             'sends'              => 'send-101',
             'rendering_failures' => 'rendering-failures-101',
             'rejects'            => 'rejects-101',
@@ -154,25 +154,27 @@ class WebhooksManagerTest extends UnitTestCase
         $subscriptionMgr = Mockery::mock(SubscriptionManager::class);
         $subscriptionMgr->shouldReceive('getEnabledEvents')
         ->twice()
-        ->andReturn([
-            'sends'              => true,
-            'rendering_failures' => true,
-        ],
-        [
-            'sends'                 => true,
-            'rendering_failures'    => true,
-            'deliveries'            => true,
-        ])
+        ->andReturn(
+            [
+                'sends'              => true,
+                'rendering_failures' => true,
+            ],
+            [
+                'sends'                 => true,
+                'rendering_failures'    => true,
+                'deliveries'            => true,
+            ]
+        )
         ->shouldReceive('getEnabledSubscriber')
         ->once()
         ->andReturn('http');
 
         $obj = new WebhooksManager(LaravelSesTrackingServiceProvider::$configName, $subscriptionMgr);
         $obj->getWebhookData();
-        
+
         $this->assertFalse($obj->validateDomain());
         $this->assertFalse($obj->validateScheme());
         $this->assertFalse($obj->validateRoutePrefix());
         $this->assertFalse($obj->validateDefinedRoutes());
-    }  
+    }
 }

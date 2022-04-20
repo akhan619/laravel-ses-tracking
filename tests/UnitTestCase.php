@@ -26,6 +26,6 @@ abstract class UnitTestCase extends BaseTestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set(LaravelSesTrackingServiceProvider::$configName . '.debug', true);  
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.debug', true);
     }
 }
