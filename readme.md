@@ -1,5 +1,6 @@
 # Laravel SES Tracking
 [![Latest Stable Version](http://poser.pugx.org/akhan619/laravel-ses-tracking/v?style=flat-square)](https://packagist.org/packages/akhan619/laravel-ses-tracking)
+![Tests](https://github.com/akhan619/laravel-ses-tracking/actions/workflows/test.yml/badge.svg?branch=main)
 [![PHP Version Require](http://poser.pugx.org/akhan619/laravel-ses-tracking/require/php?style=flat-square)](https://packagist.org/packages/akhan619/laravel-ses-tracking)
 [![Total Downloads](http://poser.pugx.org/akhan619/laravel-ses-tracking/downloads?style=flat-square)](https://packagist.org/packages/akhan619/laravel-ses-tracking)
 [![StyleCI](https://github.styleci.io/repos/480182263/shield?branch=main&style=flat-square)](https://github.styleci.io/repos/480182263?branch=main)
