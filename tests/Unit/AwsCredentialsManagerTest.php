@@ -6,7 +6,7 @@ use Akhan619\LaravelSesTracking\App\Implementations\AwsCredentialsManager;
 use Akhan619\LaravelSesTracking\Console\Commands\SetupTrackingCommand;
 use Akhan619\LaravelSesTracking\LaravelSesTrackingServiceProvider;
 use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
-use \Mockery;
+use Mockery;
 
 class AwsCredentialsManagerTest extends UnitTestCase
 {

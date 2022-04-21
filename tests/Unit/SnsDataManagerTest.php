@@ -6,7 +6,7 @@ use Akhan619\LaravelSesTracking\App\Implementations\SnsDataManager;
 use Akhan619\LaravelSesTracking\Console\Commands\SetupTrackingCommand;
 use Akhan619\LaravelSesTracking\LaravelSesTrackingServiceProvider;
 use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
-use \Mockery;
+use Mockery;
 
 class SnsDataManagerTest extends UnitTestCase
 {
@@ -230,12 +230,12 @@ class SnsDataManagerTest extends UnitTestCase
         $topicData = $obj->getTopicConfigurationData();
 
         $this->assertEquals($topicData, [
-            'Attributes'    =>  [
-                'DeliveryPolicy'    =>  json_encode(['TWO-FACE']),
-                'Policy'            =>  json_encode(['ROBIN']),
-                'KmsMasterKeyId'    =>  "BANE",
-                'Tags'              =>  [['Key' => 'Key1', 'Value' => 'Value1']],
-            ]
+            'Attributes'    => [
+                'DeliveryPolicy'    => json_encode(['TWO-FACE']),
+                'Policy'            => json_encode(['ROBIN']),
+                'KmsMasterKeyId'    => 'BANE',
+                'Tags'              => [['Key' => 'Key1', 'Value' => 'Value1']],
+            ],
         ]);
     }
 
@@ -259,13 +259,13 @@ class SnsDataManagerTest extends UnitTestCase
         $subsData = $obj->getSubscriptionConfigurationData();
 
         $this->assertEquals($subsData, [
-            'Attributes'    =>  [
-                'DeliveryPolicy'        =>  json_encode(['DRMANHATTAN']),
-                'FilterPolicy'          =>  json_encode(['OZZYMANDIAS']),
-                'RawMessageDelivery'    =>  "true",
-                'RedrivePolicy'         =>  "COMEDIAN",
+            'Attributes'    => [
+                'DeliveryPolicy'        => json_encode(['DRMANHATTAN']),
+                'FilterPolicy'          => json_encode(['OZZYMANDIAS']),
+                'RawMessageDelivery'    => 'true',
+                'RedrivePolicy'         => 'COMEDIAN',
             ],
-            'ReturnSubscriptionArn'     =>  true
+            'ReturnSubscriptionArn'     => true,
         ]);
     }
 }
