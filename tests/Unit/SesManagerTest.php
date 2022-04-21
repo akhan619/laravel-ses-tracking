@@ -5,7 +5,6 @@ namespace Akhan619\LaravelSesTracking\Tests\Unit;
 use Akhan619\LaravelSesTracking\App\Contracts\AwsCredentialsContract;
 use Akhan619\LaravelSesTracking\App\Contracts\SesDataContract;
 use Akhan619\LaravelSesTracking\App\SesManager;
-use Akhan619\LaravelSesTracking\App\SnsManager;
 use Akhan619\LaravelSesTracking\Console\Commands\SetupTrackingCommand;
 use Akhan619\LaravelSesTracking\LaravelSesTrackingServiceProvider;
 use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
@@ -83,7 +82,7 @@ class SesManagerTest extends UnitTestCase
      * @test
      */
     public function sesManagerCreateConfigurationSetMethodWorksCorrectlyInLiveMode()
-    {        
+    {
         $aws = Mockery::mock(AwsCredentialsContract::class);
         $aws->shouldReceive([
             'getAwsAccessKeyId'     => 'someId',
@@ -111,7 +110,7 @@ class SesManagerTest extends UnitTestCase
      * @test
      */
     public function sesManagerConfirmNamingConventionPrintsCorrectly()
-    {        
+    {
         $aws = Mockery::mock(AwsCredentialsContract::class);
         $aws->shouldReceive([
             'getAwsAccessKeyId'     => 'someId',
@@ -127,10 +126,10 @@ class SesManagerTest extends UnitTestCase
 
         $dataMgr->shouldReceive('getEventDestinationSuffix')
         ->andReturn('us-east-1');
-        
+
         $dataMgr->shouldReceive('getTopicNameAsSuffix')
         ->andReturn(true);
-        
+
         $dataMgr->shouldReceive('getEventDestinationPrefix')
         ->andReturn('destination');
 
@@ -138,7 +137,7 @@ class SesManagerTest extends UnitTestCase
         $console->shouldReceive('getIo->table')
         ->once()
         ->with(['Event', 'Event Destination Name'], [
-            ['sends', 'destination-sns-sends']
+            ['sends', 'destination-sns-sends'],
         ]);
 
         $console->shouldReceive('info')
@@ -157,7 +156,7 @@ class SesManagerTest extends UnitTestCase
      * @test
      */
     public function sesManagerConfirmNamingConventionThrowsExceptionOnEmptyName()
-    {        
+    {
         $aws = Mockery::mock(AwsCredentialsContract::class);
         $aws->shouldReceive([
             'getAwsAccessKeyId'     => 'someId',
@@ -173,10 +172,10 @@ class SesManagerTest extends UnitTestCase
 
         $dataMgr->shouldReceive('getEventDestinationSuffix')
         ->andReturn(null);
-        
+
         $dataMgr->shouldReceive('getTopicNameAsSuffix')
         ->andReturn(false);
-        
+
         $dataMgr->shouldReceive('getEventDestinationPrefix')
         ->andReturn(null);
 
@@ -190,7 +189,7 @@ class SesManagerTest extends UnitTestCase
         ->once();
 
         $sesMgr = new SesManager($aws, $dataMgr, true, $console);
-        
+
         $hasThrown = false;
 
         try {

@@ -3,11 +3,11 @@
 namespace Akhan619\LaravelSesTracking\Tests\Unit;
 
 use Akhan619\LaravelSesTracking\App\Implementations\SubscriptionManager;
-use Akhan619\LaravelSesTracking\Console\Commands\SetupTrackingCommand;
 use Akhan619\LaravelSesTracking\App\Implementations\WebhooksManager;
+use Akhan619\LaravelSesTracking\Console\Commands\SetupTrackingCommand;
 use Akhan619\LaravelSesTracking\LaravelSesTrackingServiceProvider;
 use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
-use \Mockery;
+use Mockery;
 
 class WebhooksManagerTest extends UnitTestCase
 {
@@ -224,7 +224,7 @@ class WebhooksManagerTest extends UnitTestCase
         ->once()
         ->with(['Event', 'Route Name'], [
             ['sends', 'https://example.com/notifications/send-101'],
-            ['rendering_failures', 'https://example.com/notifications/rendering-failures-101']
+            ['rendering_failures', 'https://example.com/notifications/rendering-failures-101'],
         ]);
 
         $console->shouldReceive('confirm')
