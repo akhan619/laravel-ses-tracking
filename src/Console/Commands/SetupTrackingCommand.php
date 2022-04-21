@@ -41,10 +41,10 @@ class SetupTrackingCommand extends Command
     }
 
     /**
-    * Get the SymfonyStyle instance
-    *
-    * @return SymfonyStyle
-    */
+     * Get the SymfonyStyle instance.
+     *
+     * @return SymfonyStyle
+     */
     public function getIo()
     {
         return $this->io;

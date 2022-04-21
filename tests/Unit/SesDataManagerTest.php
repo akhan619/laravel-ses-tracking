@@ -6,7 +6,7 @@ use Akhan619\LaravelSesTracking\App\Implementations\SesDataManager;
 use Akhan619\LaravelSesTracking\Console\Commands\SetupTrackingCommand;
 use Akhan619\LaravelSesTracking\LaravelSesTrackingServiceProvider;
 use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
-use \Mockery;
+use Mockery;
 
 class SesDataManagerTest extends UnitTestCase
 {
@@ -242,12 +242,12 @@ class SesDataManagerTest extends UnitTestCase
 
         $this->assertEquals($configSet, [
             'ConfigurationSetName' => 'Test-Set',
-            'DeliveryOptions' => [
+            'DeliveryOptions'      => [
                 'SendingPoolName' => 'pool-1',
-                'TlsPolicy' => 'REQUIRE',
+                'TlsPolicy'       => 'REQUIRE',
             ],
             'ReputationOptions' => [
-                'LastFreshStart' => '10 September 2000',
+                'LastFreshStart'           => '10 September 2000',
                 'ReputationMetricsEnabled' => true,
             ],
             'SendingOptions' => [
@@ -258,7 +258,7 @@ class SesDataManagerTest extends UnitTestCase
             ],
             'Tags' => [
                 [
-                    'Key' => 'Key1',
+                    'Key'   => 'Key1',
                     'Value' => 'Value1',
                 ],
             ],
