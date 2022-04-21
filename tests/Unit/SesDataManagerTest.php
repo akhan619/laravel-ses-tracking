@@ -216,4 +216,55 @@ class SesDataManagerTest extends UnitTestCase
 
         $obj->validateForCli($console);
     }
+
+    protected function setValuesForConfigurationSetDataTest($app)
+    {
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.ConfigurationSetName', 'Test-Set');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.DeliveryOptions.SendingPoolName', 'pool-1');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.DeliveryOptions.TlsPolicy', 'REQUIRE');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.ReputationOptions.LastFreshStart', '10 September 2000');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.ReputationOptions.ReputationMetricsEnabled', true);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.SendingOptions.SendingEnabled', true);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.SuppressionOptions.SuppressedReasons', ['BOUNCE']);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.Tags', [['Key' => 'Key1', 'Value' => 'Value1']]);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.configuration_set.TrackingOptions.CustomRedirectDomain', 'mydomain.com');
+    }
+
+    /**
+     * @test
+     * @define-env setValuesForConfigurationSetDataTest
+     */
+    public function configurationSetDataIsSetCorrectly()
+    {
+        $obj = new SesDataManager(LaravelSesTrackingServiceProvider::$configName);
+        $obj->getSesData();
+        $configSet = $obj->getConfigurationSet();
+
+        $this->assertEquals($configSet, [
+            'ConfigurationSetName' => 'Test-Set',
+            'DeliveryOptions' => [
+                'SendingPoolName' => 'pool-1',
+                'TlsPolicy' => 'REQUIRE',
+            ],
+            'ReputationOptions' => [
+                'LastFreshStart' => '10 September 2000',
+                'ReputationMetricsEnabled' => true,
+            ],
+            'SendingOptions' => [
+                'SendingEnabled' => true,
+            ],
+            'SuppressionOptions' => [
+                'SuppressedReasons' => ['BOUNCE'],
+            ],
+            'Tags' => [
+                [
+                    'Key' => 'Key1',
+                    'Value' => 'Value1',
+                ],
+            ],
+            'TrackingOptions' => [
+                'CustomRedirectDomain' => 'mydomain.com',
+            ],
+        ]);
+    }
 }

@@ -210,4 +210,62 @@ class SnsDataManagerTest extends UnitTestCase
 
         $obj->validateForCli($console);
     }
+
+    protected function setValuesForTopicConfigurationDataTest($app)
+    {
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.sns_topic_configuration_data.DeliveryPolicy', ['TWO-FACE']);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.sns_topic_configuration_data.Policy', ['ROBIN']);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.sns_topic_configuration_data.KmsMasterKeyId', 'BANE');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.sns_topic_configuration_data.Tags', [['Key' => 'Key1', 'Value' => 'Value1']]);
+    }
+
+    /**
+     * @test
+     * @define-env setValuesForTopicConfigurationDataTest
+     */
+    public function topicConfigurationDataIsSetCorrectly()
+    {
+        $obj = new SnsDataManager(LaravelSesTrackingServiceProvider::$configName);
+        $obj->getSnsData();
+        $topicData = $obj->getTopicConfigurationData();
+
+        $this->assertEquals($topicData, [
+            'Attributes'    =>  [
+                'DeliveryPolicy'    =>  json_encode(['TWO-FACE']),
+                'Policy'            =>  json_encode(['ROBIN']),
+                'KmsMasterKeyId'    =>  "BANE",
+                'Tags'              =>  [['Key' => 'Key1', 'Value' => 'Value1']],
+            ]
+        ]);
+    }
+
+    protected function setValuesForSubscriptionConfigurationDataTest($app)
+    {
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.sns_subscription_configuration_data.ReturnSubscriptionArn', true);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.sns_subscription_configuration_data.DeliveryPolicy', ['DRMANHATTAN']);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.sns_subscription_configuration_data.FilterPolicy', ['OZZYMANDIAS']);
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.sns_subscription_configuration_data.RawMessageDelivery', 'true');
+        $app['config']->set(LaravelSesTrackingServiceProvider::$configName.'.sns_subscription_configuration_data.RedrivePolicy', 'COMEDIAN');
+    }
+
+    /**
+     * @test
+     * @define-env setValuesForSubscriptionConfigurationDataTest
+     */
+    public function subscriptionConfigurationDataIsSetCorrectly()
+    {
+        $obj = new SnsDataManager(LaravelSesTrackingServiceProvider::$configName);
+        $obj->getSnsData();
+        $subsData = $obj->getSubscriptionConfigurationData();
+
+        $this->assertEquals($subsData, [
+            'Attributes'    =>  [
+                'DeliveryPolicy'        =>  json_encode(['DRMANHATTAN']),
+                'FilterPolicy'          =>  json_encode(['OZZYMANDIAS']),
+                'RawMessageDelivery'    =>  "true",
+                'RedrivePolicy'         =>  "COMEDIAN",
+            ],
+            'ReturnSubscriptionArn'     =>  true
+        ]);
+    }
 }
