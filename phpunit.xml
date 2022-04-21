@@ -22,9 +22,9 @@
     <testsuite name="Unit">
       <directory suffix="Test.php">./tests/Unit</directory>
     </testsuite>
-    <testsuite name="Feature">
+    <!-- <testsuite name="Feature">
       <directory suffix="Test.php">./tests/Feature</directory>
-    </testsuite>
+    </testsuite> -->
   </testsuites>
   <php>
     <env name="PHPUNIT_PRETTY_PRINT_PROGRESS" value="true" />
