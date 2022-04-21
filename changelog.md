@@ -2,6 +2,9 @@
 
 All notable changes to `LaravelSesTracking` will be documented in this file.
 
+## Version 1.0.6
+- Improved the code coverage of the tests.
+
 ## Version 1.0.5
 - StyleCI prettiness.
 
