@@ -234,7 +234,7 @@ class SesManagerTest extends UnitTestCase
         ->andReturn('destination');
 
         $snsMgr = Mockery::mock(SnsManager::class);
-        
+
         $console = Mockery::mock(SetupTrackingCommand::class);
         $console->shouldReceive('getIo->table')
         ->once()
