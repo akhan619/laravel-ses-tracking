@@ -1,31 +1,51 @@
 # Changelog
 
-All notable changes to `LaravelSesTracking` will be documented in this file.
+All notable changes to `Laravel Ses Tracking` will be documented in this file.
+
+## Version 1.0.7
+
+### Changed
+- Improved the code coverage of the tests.
+- Improved Readme.md
+- Fixed typos in docs.
 
 ## Version 1.0.6
+
+### Changed
 - Improved the code coverage of the tests.
 
 ## Version 1.0.5
+
+### Added
 - StyleCI prettiness.
 
 ## Version 1.0.4
+
+### Added
 - Added tests to the project.
+
+### Fixed
 - Changed badge style as old style wans't working for downloads.
 
 ## Version 1.0.3
-- Fixed text in readme.md to correct 'hard-bounces' to 'bounces'
+
+### Added
 - Added badges to readme.md
 
-## Version 1.0.2
-- Added StyleCI prettiness.
-- Changed default route and topic name for bounces from 'hard-bounces' to 'bounces'
-
 ### Fixed
-- Mention laravel artisan in description for packagist.
+- Fixed text in readme.md to correct 'hard-bounces' to 'bounces'
+
+## Version 1.0.2
+
+### Added
+- Added StyleCI prettiness.
+
+### Changed
+- Changed default route and topic name for bounces from 'hard-bounces' to 'bounces'.
 
 ## Version 1.0.1
 
-### Fixed
+### Added
 - Mention laravel artisan in description for packagist.
 
 ## Version 1.0.0

@@ -5,6 +5,7 @@ namespace Akhan619\LaravelSesTracking\Tests\Unit;
 use Akhan619\LaravelSesTracking\App\Contracts\AwsCredentialsContract;
 use Akhan619\LaravelSesTracking\App\Contracts\SesDataContract;
 use Akhan619\LaravelSesTracking\App\SesManager;
+use Akhan619\LaravelSesTracking\App\SnsManager;
 use Akhan619\LaravelSesTracking\Console\Commands\SetupTrackingCommand;
 use Akhan619\LaravelSesTracking\LaravelSesTrackingServiceProvider;
 use Akhan619\LaravelSesTracking\Tests\UnitTestCase;
@@ -199,5 +200,75 @@ class SesManagerTest extends UnitTestCase
         }
 
         $this->assertTrue($hasThrown);
+    }
+
+    /**
+     * @test
+     */
+    public function sesManagerCreateEventDestinationPrintsCorrectlyInDebugMode()
+    {
+        $aws = Mockery::mock(AwsCredentialsContract::class);
+        $aws->shouldReceive([
+            'getAwsAccessKeyId'     => 'someId',
+            'getAwsSecretAccessKey' => 'someKey',
+            'getAwsDefaultRegion'   => 'us-east-1',
+        ])
+        ->once();
+
+        $dataMgr = Mockery::mock(SesDataContract::class);
+        $dataMgr->shouldReceive('getConfigurationSetName')
+        ->once()
+        ->andReturn('Test-Set-1');
+
+        $dataMgr->shouldReceive('getDestinationNames')
+        ->once()
+        ->andReturn(['sends'    =>  'sns']);
+
+        $dataMgr->shouldReceive('getEventDestinationSuffix')
+        ->andReturn('us-east-1');
+
+        $dataMgr->shouldReceive('getTopicNameAsSuffix')
+        ->andReturn(true);
+
+        $dataMgr->shouldReceive('getEventDestinationPrefix')
+        ->andReturn('destination');
+
+        $snsMgr = Mockery::mock(SnsManager::class);
+        
+        $console = Mockery::mock(SetupTrackingCommand::class);
+        $console->shouldReceive('getIo->table')
+        ->once()
+        ->with(['Event', 'Event Destination Name'], [
+            ['sends', 'destination-sns-sends'],
+        ]);
+
+        $console->shouldReceive('info')
+        ->once();
+
+        $console->shouldReceive('newLine')
+        ->once();
+
+        $sesMgr = Mockery::mock(SesManager::class, [$aws, $dataMgr, true, $console])
+        ->makePartial()
+        ->shouldAllowMockingProtectedMethods();
+
+        $sesMgr->shouldReceive('prettyPrintArray')
+        ->with([
+            'ConfigurationSetName' => 'Test-Set-1',
+            'EventDestination'     => [
+                'Enabled'            => true,
+                'MatchingEventTypes' => ['SEND'],
+                'SnsDestination'     => [
+                    'TopicArn' => 'Not Available in Debug Mode',
+                ],
+            ],
+            'EventDestinationName' => 'destination-sns-sends',
+        ], 'SES Event Destination Configuration Data')
+        ->once();
+
+        $sesMgr->confirmNamingConvention(['sends'   => true], ['sends'  => 'sends']);
+        $sesMgr->createSesEventDestinations($snsMgr);
+
+        $this->assertTrue(true);
     }
 }

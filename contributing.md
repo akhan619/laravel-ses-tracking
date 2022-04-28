@@ -4,7 +4,7 @@ Contributions are welcome and will be fully credited.
 
 Will appreciate any pull requests for adding tests to the package.
 
-Contributions are accepted via Pull Requests on [Github](https://github.com/akhan619/laravel-email-events-ses-setup).
+Contributions are accepted via Pull Requests on [Github](https://github.com/akhan619/laravel-ses-tracking).
 
 ## Pull Requests
 

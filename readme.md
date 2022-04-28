@@ -23,11 +23,13 @@ The package will not do anything beyond what is mentioned above. So, the package
 -  Manage the https/s subscription confirmation or actual processing of event messages from SNS.
 -  Create the domains or endpoints with a Laravel project running (but won't that be awesome :smiley: ).
 
-Basically, the package refrains from any action that will be implementation specific. After all, you are in a better position to decide what to do when an email bounce event occurs.
+If you are looking for a package that will manage the incoming `SES` notifications and track email events then you may look at the [Laravel Ses Event Manager](https://github.com/akhan619/laravel-ses-event-manager) package. The `Laravel Ses Event Manager` package integrates nicely with this package and handles the processing and storage of email event notifications sent to the webhooks.
+
+> **FULL DISCLOSURE**: I am the author of the `Laravel Ses Event Manager` package.
 
 # Laravel and PHP Versions
 
-The package is written for Laravel 9 and Php 8.
+The package is written for Laravel 9 and Php 8 and above.
 
 # Overview of SES/SNS Event Notification Process
 
