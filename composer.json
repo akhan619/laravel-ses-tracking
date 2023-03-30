@@ -12,7 +12,7 @@
     "keywords": ["Laravel", "Ses", "Tracking", "Sns", "Webhook", "http", "https", "email", "cli"],
     "require": {
         "php": "^8.0.2",
-        "illuminate/support": "~9",
+        "illuminate/support": "^9.0|^10.0",
         "aws/aws-sdk-php": "^3.218"
     },
     "require-dev": {
